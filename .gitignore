@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+app.log
+
+# Generated files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.avi
+*.mov
+
+# Test files
+test_*.py
+test_*.json
+debug_*.py
+
+# Gradio
+flagged/
+gradio_cached_examples/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Backup folders (keep structure but not content)
+backup/*
+!backup/.gitkeep
+old_versions/*
+!old_versions/.gitkeep
+
+# Node modules (if any frontend deps)
+node_modules/
+
+# OS files
+Thumbs.db
+.DS_Store
