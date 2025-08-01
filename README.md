@@ -1,6 +1,6 @@
 # Veo3 Enhanced Prompt Generator
 
-A streamlined application for creating AI-powered video generation prompts with visual storyboard annotations.
+A streamlined application for creating AI-powered video generation prompts with visual storyboard annotations. Available as both a Gradio UI and FastAPI endpoint.
 
 ## Features
 
@@ -10,6 +10,7 @@ A streamlined application for creating AI-powered video generation prompts with 
 - **Manual Annotations**: Add your own custom markings and annotations
 - **Flexible Workflow**: Choose between original, AI-annotated, or manually annotated images
 - **Veo3 JSON Generation**: Create comprehensive video generation specifications
+- **API Endpoint**: Programmatic access via FastAPI
 
 ## Prerequisites
 
@@ -21,8 +22,8 @@ A streamlined application for creating AI-powered video generation prompts with 
 
 1. Clone the repository:
 ```bash
-git clone [your-repo-url]
-cd prompt-maker
+git clone https://github.com/noodleA1/veo3.git
+cd veo3
 ```
 
 2. Create a virtual environment:
@@ -45,22 +46,57 @@ REPLICATE_API_TOKEN=your_replicate_token_here
 
 ## Usage
 
-Run the application:
+### Option 1: Gradio UI
+
+Run the interactive web interface:
 ```bash
 python veo3_complete.py
 ```
 
-The app will launch in your browser with a Gradio interface.
+The app will launch in your browser with a user-friendly interface.
 
-### Workflow
-
+#### Workflow:
 1. **Start with an Image**: Upload an existing image or generate one using AI
 2. **Analyze**: The system automatically analyzes the image for storyboard opportunities
 3. **Create Annotations**: Generate AI annotations or add your own manual markings
 4. **Choose Working Image**: Select which version to use (original, AI-annotated, or manual)
 5. **Generate Veo3 JSON**: Describe your video vision and generate the final specification
 
-### Annotation Color Coding
+### Option 2: FastAPI Endpoint
+
+Run the API server:
+```bash
+python veo3_api.py
+```
+
+The API will be available at `http://localhost:8000`
+
+#### API Usage:
+
+**Endpoint:** `POST /generate-veo3`
+
+**Example with curl:**
+```bash
+curl -X POST "http://localhost:8000/generate-veo3" \
+  -F "image=@/path/to/your/image.jpg" \
+  -F "prompt=Create a cinematic shot with slow camera movement"
+```
+
+**Example with Python:**
+```python
+import requests
+
+url = "http://localhost:8000/generate-veo3"
+files = {"image": open("image.jpg", "rb")}
+data = {"prompt": "Create a cinematic shot with slow camera movement"}
+
+response = requests.post(url, files=files, data=data)
+print(response.json())
+```
+
+**Interactive API docs:** Visit `http://localhost:8000/docs`
+
+## Annotation Color Coding
 
 - **RED**: Primary subject/hero element movements
 - **BLUE**: Camera motion indicators
@@ -70,24 +106,46 @@ The app will launch in your browser with a Gradio interface.
 ## Project Structure
 
 ```
-prompt-maker/
-├── veo3_complete.py      # Main application
+veo3/
+├── veo3_complete.py      # Gradio UI application
+├── veo3_api.py          # FastAPI endpoint
 ├── requirements.txt      # Python dependencies
 ├── .env                 # Environment variables (create this)
-├── backup/              # Legacy code archive
-└── old_versions/        # Previous iterations
+├── README.md            # This file
+└── veo3_json_examples.json  # Example output structures
 ```
+
+## Response Format
+
+The Veo3 JSON output includes:
+- Main video generation prompt
+- Scene description with annotated elements
+- Camera settings and movements
+- Subject motion paths
+- Visual style and treatment
+- Timing and pacing
+- Technical specifications
+- Audio hints
+- Storyboard integration instructions
 
 ## Technologies Used
 
-- **Gradio**: Web interface
+- **Gradio**: Web interface for UI version
+- **FastAPI**: REST API framework
 - **Google Gemini 1.5 Pro**: Image analysis and vision understanding
 - **Replicate Flux**: Image generation and annotation
 - **Pillow**: Image processing
 
-## License
+## Deployment
 
-MIT License
+### Gradio App
+- Can be deployed to Hugging Face Spaces
+- Or any server with Python support
+
+### FastAPI
+- Deploy to any cloud provider (AWS, GCP, Azure)
+- Docker-ready for containerized deployment
+- Supports horizontal scaling
 
 ## Contributing
 

@@ -52,11 +52,7 @@ gradio_cached_examples/
 *.temp
 .cache/
 
-# Backup folders (keep structure but not content)
-backup/*
-!backup/.gitkeep
-old_versions/*
-!old_versions/.gitkeep
+# Backup folders (removed from repo)
 
 # Node modules (if any frontend deps)
 node_modules/
